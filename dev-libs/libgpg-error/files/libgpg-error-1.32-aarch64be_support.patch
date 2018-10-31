@@ -1,0 +1,53 @@
+diff -ruN libgpg-error-1.32.orig/src/Makefile.am libgpg-error-1.32/src/Makefile.am
+--- libgpg-error-1.32.orig/src/Makefile.am	2018-03-22 11:43:22.000000000 -0500
++++ libgpg-error-1.32/src/Makefile.am	2018-10-03 18:35:23.558871791 -0500
+@@ -45,6 +45,7 @@
+ # Distributed lock object definitions for cross compilation.
+ lock_obj_pub = \
+         syscfg/lock-obj-pub.aarch64-unknown-linux-gnu.h     \
++	syscfg/lock-obj-pub.aarch64be-unknown-linux-gnu.h   \
+ 	syscfg/lock-obj-pub.aarch64-apple-darwin.h          \
+         syscfg/lock-obj-pub.alpha-unknown-linux-gnu.h       \
+         syscfg/lock-obj-pub.arm-unknown-linux-androideabi.h \
+diff -ruN libgpg-error-1.32.orig/src/mkheader.c libgpg-error-1.32/src/mkheader.c
+--- libgpg-error-1.32.orig/src/mkheader.c	2018-03-14 03:56:20.000000000 -0500
++++ libgpg-error-1.32/src/mkheader.c	2018-10-03 18:35:56.751991228 -0500
+@@ -94,6 +94,8 @@
+     {"armv5-unknown-linux-musleabi"   },
+     {"armv6-unknown-linux-musleabihf" },
+ 
++    {"aarch64_be-unknown-linux-gnu", "aarch64be-unknown-linux-gnu" },
++
+     { NULL }
+   };
+   int i;
+diff -ruN libgpg-error-1.32.orig/src/syscfg/lock-obj-pub.aarch64be-unknown-linux-gnu.h libgpg-error-1.32/src/syscfg/lock-obj-pub.aarch64be-unknown-linux-gnu.h
+--- libgpg-error-1.32.orig/src/syscfg/lock-obj-pub.aarch64be-unknown-linux-gnu.h	1969-12-31 18:00:00.000000000 -0600
++++ libgpg-error-1.32/src/syscfg/lock-obj-pub.aarch64be-unknown-linux-gnu.h	2018-10-03 18:34:54.281773351 -0500
+@@ -0,0 +1,26 @@
++## lock-obj-pub.aarch64-unknown-linux-gnu.h
++## File created by gen-posix-lock-obj - DO NOT EDIT
++## To be included by mkheader into gpg-error.h
++
++typedef struct
++{
++  long _vers;
++  union {
++    volatile char _priv[48];
++    long _x_align;
++    long *_xp_align;
++  } u;
++} gpgrt_lock_t;
++
++#define GPGRT_LOCK_INITIALIZER {1,{{0,0,0,0,0,0,0,0, \
++                                    0,0,0,0,0,0,0,0, \
++                                    0,0,0,0,0,0,0,0, \
++                                    0,0,0,0,0,0,0,0, \
++                                    0,0,0,0,0,0,0,0, \
++                                    0,0,0,0,0,0,0,0}}}
++##
++## Local Variables:
++## mode: c
++## buffer-read-only: t
++## End:
++##

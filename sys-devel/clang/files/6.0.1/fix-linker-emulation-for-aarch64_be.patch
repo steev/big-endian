@@ -1,0 +1,55 @@
+From 3c3905b5f7a1b5b6eecd091d9f4da495564d5819 Mon Sep 17 00:00:00 2001
+From: Peter Smith <peter.smith@linaro.org>
+Date: Mon, 3 Sep 2018 12:36:32 +0000
+Subject: [PATCH] [Aarch64] Fix linker emulation for Aarch64 big endian
+
+This patch fixes target linker emulation for aarch64 big endian.
+aarch64_be_linux is not recognized by gnu ld. The equivalent emulation
+mode supported by gnu ld is aarch64linuxb.
+
+Patch by: Bharathi Seshadri
+
+Reviewed by: Peter Smith
+
+Differential Revision: https://reviews.llvm.org/D42930
+
+
+
+git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@341312 91177308-0d34-0410-b5e6-96231b3b80d8
+---
+ lib/Driver/ToolChains/Gnu.cpp | 2 +-
+ test/Driver/linux-ld.c        | 8 ++++++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/lib/Driver/ToolChains/Gnu.cpp b/lib/Driver/ToolChains/Gnu.cpp
+index 9e24a631765..89119308490 100644
+--- a/lib/Driver/ToolChains/Gnu.cpp
++++ b/lib/Driver/ToolChains/Gnu.cpp
+@@ -237,7 +237,7 @@ static const char *getLDMOption(const llvm::Triple &T, const ArgList &Args) {
+   case llvm::Triple::aarch64:
+     return "aarch64linux";
+   case llvm::Triple::aarch64_be:
+-    return "aarch64_be_linux";
++    return "aarch64linuxb";
+   case llvm::Triple::arm:
+   case llvm::Triple::thumb:
+     return "armelf_linux_eabi";
+diff --git a/test/Driver/linux-ld.c b/test/Driver/linux-ld.c
+index 6079c7458d7..030753cb2b1 100644
+--- a/test/Driver/linux-ld.c
++++ b/test/Driver/linux-ld.c
+@@ -1754,6 +1754,14 @@
+ // CHECK-ARMV7EB: "--be8"
+ // CHECK-ARMV7EB: "-m" "armelfb_linux_eabi"
+ 
++// RUN: %clang -no-canonical-prefixes %s -### -o %t.o 2>&1 \
++// RUN:     --target=aarch64_be-unknown-linux \
++// RUN:     --gcc-toolchain="" \
++// RUN:     --sysroot=%S/Inputs/basic_linux_tree \
++// RUN:   | FileCheck --check-prefix=CHECK-AARCH64BE %s
++// CHECK-AARCH64BE: "{{.*}}ld{{(.exe)?}}" "--sysroot=[[SYSROOT:[^"]+]]"
++// CHECK-AARCH64BE: "-m" "aarch64linuxb"
++
+ // Check dynamic-linker for musl-libc
+ // RUN: %clang %s -### -o %t.o 2>&1 \
+ // RUN:     --target=i386-pc-linux-musl \
