@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_6 )
 
 inherit autotools eutils multilib user python-single-r1
 
@@ -28,10 +28,12 @@ HOMEPAGE="https://www.kismetwireless.net"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-IUSE="lm_sensors networkmanager +pcre selinux +suid"
+IUSE="lm_sensors networkmanager +pcre +python selinux +suid"
 
 CDEPEND="
-	${PYTHON_DEPS}
+	python? ( ${PYTHON_DEPS}
+			dev-python/paho-mqtt
+			)
 	networkmanager? ( net-misc/networkmanager:= )
 	dev-libs/glib:=
 	dev-libs/elfutils:=
