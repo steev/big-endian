@@ -7,7 +7,7 @@
 #arch		profile_directory				status
 
 # ARM64 Big Endian Profiles
-# @MAINTAINER: arm64@gentoo.org
+# @MAINTAINER: steev@gentoo.org
 arm64           default/linux/arm64be/17.0                        dev
 arm64           default/linux/arm64be/17.0/desktop                dev
 arm64           default/linux/arm64be/17.0/desktop/systemd        dev
