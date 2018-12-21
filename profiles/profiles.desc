@@ -8,10 +8,10 @@
 
 # ARM64 Big Endian Profiles
 # @MAINTAINER: arm64@gentoo.org
-arm64           default/linux/arm64_be/17.0                     dev
-arm64           default/linux/arm64_be/17.0/desktop             dev
-arm64           default/linux/arm64_be/17.0/desktop/systemd     dev
-arm64           default/linux/arm64_be/17.0/developer           dev
-arm64           default/linux/arm64_be/17.0/systemd             dev
+arm64           default/linux/arm64be/17.0                        dev
+arm64           default/linux/arm64be/17.0/desktop                dev
+arm64           default/linux/arm64be/17.0/desktop/systemd        dev
+arm64           default/linux/arm64be/17.0/developer              dev
+arm64           default/linux/arm64be/17.0/systemd                dev
 
 # vim: set ts=8:
