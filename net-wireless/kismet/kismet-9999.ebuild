@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils multilib user python-single-r1
 
@@ -13,7 +13,7 @@ MY_P=${MY_P/./-R}
 S=${WORKDIR}/${MY_P}
 
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://www.kismetwireless.net/${PN}.git"
+	EGIT_REPO_URI="https://www.kismetwireless.net/git/${PN}.git"
 	SRC_URI=""
 	inherit git-r3
 	KEYWORDS=""
