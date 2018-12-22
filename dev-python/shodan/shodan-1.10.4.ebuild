@@ -23,6 +23,7 @@ DEPEND="
 dev-python/click-plugins
 dev-python/colorama
 dev-python/requests
+dev-python/xlsxwriter
 "
 RDEPEND="${DEPEND}"
 
