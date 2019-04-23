@@ -1,0 +1,12 @@
+diff -ruN M2Crypto-0.31.0.orig/setup.py M2Crypto-0.31.0/setup.py
+--- M2Crypto-0.31.0.orig/setup.py	2019-04-23 16:52:45.636935473 -0500
++++ M2Crypto-0.31.0/setup.py	2019-04-23 18:32:03.482126226 -0500
+@@ -175,6 +175,8 @@
+             self.swig_opts.append('-D%s' % arch)
+             if mach in ('ppc64le', 'ppc64el'):
+                 self.swig_opts.append('-D_CALL_ELF=2')
++            elif mach in ('aarch64_be'):
++                self.swig_opts.append('-D__AARCH64EB__')
+ 
+         self.swig_opts.extend(['-I%s' % i for i in self.include_dirs])
+ 
